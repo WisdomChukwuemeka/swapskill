@@ -4,6 +4,9 @@
 *{
     box-sizing: border-box;
 }
+body{
+    background-color: black;
+}
 
 /* styles.css */
 @media (min-width: 4000px) {
