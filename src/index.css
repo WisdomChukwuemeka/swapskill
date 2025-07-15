@@ -1,0 +1,15 @@
+@import "tailwindcss";
+
+
+*{
+    box-sizing: border-box;
+}
+
+/* styles.css */
+@media (min-width: 4000px) {
+  .container-4xl {
+    max-width: 4000px; /* or whatever max-width you want */
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
