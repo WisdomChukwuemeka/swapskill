@@ -1,5 +1,6 @@
 {
   "name": "swapskill",
+  "homepage": "https://WisdomChukwuemeka.github.io/swapskill",
   "private": true,
   "version": "0.0.0",
   "type": "module",
@@ -8,12 +9,15 @@
     "build": "vite build",
     "lint": "eslint .",
     "preview": "vite preview",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d dist",
     "tailwind:init": "tailwindcss init -p"
   },
   "dependencies": {
     "@tailwindcss/vite": "^4.1.11",
     "axios": "^1.10.0",
     "bootstrap-icons": "^1.13.1",
+    "gh-pages": "^6.3.0",
     "motion": "^12.23.3",
     "react": "^19.1.0",
     "react-dom": "^19.1.0",
