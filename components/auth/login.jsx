@@ -38,10 +38,13 @@ export const Login = ({ onLogin }) => {
       const role = localStorage.getItem("role");
       const is_superuser = JSON.parse(localStorage.getItem("is_superuser"));
       if (role === "create") {
-        navigate("/dashboard");
-      } else if (role === "offer") {
-        navigate("/");
-      }
+  navigate("/dashboard");
+  window.location.reload();
+} else if (role === "offer") {
+  navigate("/");
+  window.location.reload();
+}
+
       onLogin(response.data.user);
     } catch (error) {
       setError(

@@ -7,13 +7,23 @@ import { useNavigate } from "react-router-dom";
 
 export const Layout = () => {
   const navigate = useNavigate();
+  const [isrole, setIsRole] = useState(
+    !!localStorage.getItem("role")
+  )
+  const [active, setActive] = useState(false)
+
   const [isLoggedIn, setIsLoggedIn] = useState(
     !!localStorage.getItem("access_token")
   );
   const [menuOpen, setMenuOpen] = useState(false);
   const menuRef = useRef();
+  const leftbarRef = useRef();
+  const [leftbarOpen, setLeftBarOpen] = useState(false)
 
   const toggleMenu = () => setMenuOpen(!menuOpen);
+  const leftbarbutton = () => {
+    setLeftBarOpen(!leftbarOpen)
+  }
 
   const handleLogout = () => {
     localStorage.removeItem("access_token");
@@ -32,6 +42,19 @@ export const Layout = () => {
     };
     checkLogin();
   }, []);
+
+  useEffect(() => {
+    const checkrole = () => {
+      const role = localStorage.getItem("role")
+      if (role === "create"){
+        setActive(true)
+      }
+      else if(role === "offer"){
+        setActive(false)
+      }
+    }
+    checkrole()
+  },[])
 
   // ✅ Close on outside click
   useEffect(() => {
@@ -52,6 +75,24 @@ export const Layout = () => {
     };
   }, [menuOpen]);
 
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (leftbarRef.current && !leftbarRef.current.contains(event.target)) {
+        setLeftBarOpen(false);
+      }
+    };
+
+    if (leftbarOpen) {
+      document.addEventListener("mousedown", handleClickOutside);
+    } else {
+      document.removeEventListener("mousedown", handleClickOutside);
+    }
+
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [leftbarOpen]);
+
   return (
     <>
       <div className="relative bg-gradient-to-b from-black/30 to-black/10 backdrop-blur-md">
@@ -59,11 +100,12 @@ export const Layout = () => {
           {/* Left: Logo + Title + Sidebar Toggle */}
           <div className="flex items-center gap-4">
             <button
-              onClick={toggleMenu}
+              onClick={leftbarbutton}
               aria-label="Toggle Sidebar"
               className="text-gray-200 hover:text-green-500 text-2xl md:text-3xl transition-colors"
             >
-              <i className="bi bi-list"></i>
+              {leftbarOpen ? (<i className="bi bi-list"></i>) : (<i className="bi bi-list"></i>)}
+              
             </button>
 
             <button
@@ -74,14 +116,14 @@ export const Layout = () => {
             </button>
 
             <h1 className="text-white font-bold tracking-wide text-lg md:text-2xl">
-              Dashboard
+              Swapskill
             </h1>
           </div>
 
           {/* Right: Search + Bell + Menu */}
           <div className="flex items-center gap-5 md:gap-6">
             {/* Search */}
-            <div className="relative w-40 md:w-64">
+            <div className="relative w-40 md:w-64 hidden md:flex">
               <input
                 type="search"
                 placeholder="Search..."
@@ -121,44 +163,91 @@ export const Layout = () => {
         {/* Dropdown Menu */}
         {menuOpen && (
           <nav
-            ref={menuRef}
-            className="absolute right-6 mt-4 w-40 bg-black/70 backdrop-blur-md border border-white/20 rounded-lg p-4 shadow-lg z-50"
-          >
-            <ul className="flex flex-col gap-3 text-center text-white font-medium ">
-              <li className="hover:text-green-400 cursor-pointer transition">
-                Profile
-              </li>
-              <li className="hover:text-green-400 cursor-pointer transition">
-                Task
-              </li>
-              <li className="hover:text-green-400 cursor-pointer transition">
-                Certificates
-              </li>
-              <li className="hover:text-green-400 cursor-pointer transition">
-                Lookup
-              </li>
-              <li className="hover:text-green-400 cursor-pointer transition">
-                Settings
-              </li>
-              <li className="hover:text-green-400 cursor-pointer transition">
-                Save Up
-              </li>
-              {isLoggedIn ? (
-                <button
-                  onClick={handleLogout}
-                  className="hover:text-green-400 transition text-left"
-                >
-                  Sign out
-                </button>
-              ) : (
-                <Link to="/login" className="hover:text-green-400 transition">
-                  Sign in
-                </Link>
-              )}
-            </ul>
-          </nav>
+  ref={menuRef}
+  className="absolute right-6 mt-4 w-44  bg-white/13 backdrop-blur-md rounded-xl p-4 shadow-xl z-50"
+>
+  <ul className="flex flex-col gap-2 text-center text-gray-200 font-medium">
+    <li className="hover:bg-green-600/80 px-3 py-2 rounded-lg cursor-pointer transition-colors duration-200">
+      Profile
+    </li>
+    <li className="hover:bg-green-600/80 px-3 py-2 rounded-lg cursor-pointer transition-colors duration-200">
+      Task
+    </li>
+    <li className="hover:bg-green-600/80 px-3 py-2 rounded-lg cursor-pointer transition-colors duration-200">
+      Certificates
+    </li>
+    <li className="hover:bg-green-600/80 px-3 py-2 rounded-lg cursor-pointer transition-colors duration-200">
+      Lookup
+    </li>
+    <li className="hover:bg-green-600/80 px-3 py-2 rounded-lg cursor-pointer transition-colors duration-200">
+      Settings
+    </li>
+    <li className="hover:bg-green-600/80 px-3 py-2 rounded-lg cursor-pointer transition-colors duration-200">
+      Save Up
+    </li>
+    {isLoggedIn ? (
+      <button
+        onClick={handleLogout}
+        className="w-full text-center px-3 py-2 mt-2 bg-red-600 hover:bg-red-700 rounded-lg transition-colors duration-200"
+      >
+        Sign out
+      </button>
+    ) : (
+      <Link
+        to="/login"
+        className="block px-3 py-2 mt-2 bg-green-600 hover:bg-green-700 rounded-lg text-center transition-colors duration-200"
+      >
+        Sign in
+      </Link>
+    )}
+  </ul>
+</nav>
+
         )}
       </div>
+
+
+
+      {setIsLoggedIn && active && (
+        <div>
+        {!leftbarOpen ? ("") : 
+        (<div
+          ref={leftbarRef}
+          className="absolute left-0 w-full max-w-sm bg-white/10 backdrop-blur-md rounded-xl shadow-lg p-8 md:p-12 text-white z-10">
+            <ul class="flex flex-col justify-evenly items-center gap-8 text-md">
+              <div class="hover:bg-gradient-to-r hover:from-green-700 hover:to-green-950  w-full duration-500 p-2 rounded">
+                <Link to="/" >
+                <li class="flex gap-4"><i class="bi bi-house"></i>Home</li>
+                </Link>
+              </div>
+              
+              <div class="hover:bg-gradient-to-r hover:from-green-700 hover:to-green-950 w-full duration-500 p-2 rounded">
+                <Link to="/addskill" ><li class="flex gap-4"><i class="bi bi-plus-circle"></i>Add skill</li></Link>
+              </div>
+              <div class="hover:bg-gradient-to-r hover:from-green-700 hover:to-green-950 w-full duration-500 p-2 rounded">
+                <li class="flex gap-4"><i class="bi bi-pencil-square"></i>Edit skill</li>
+              </div>
+              <div class="hover:bg-gradient-to-r hover:from-green-700 hover:to-green-950 w-full duration-500 p-2 rounded">
+                <Link to="/dashboard"><li>Dashboard</li></Link>
+              </div>
+              <div class="hover:bg-gradient-to-r hover:from-green-700 hover:to-green-950 w-full duration-500 p-2 rounded">
+                <li>Ai chat</li>
+              </div>
+              <div class="hover:bg-gradient-to-r hover:from-green-700 hover:to-green-950 w-full duration-500 p-2 rounded">
+                <li>Report</li>
+              </div>
+              <div class="hover:bg-gradient-to-r hover:from-green-700 hover:to-green-950 w-full duration-500 p-2 rounded">
+                <li>Request</li>
+              </div>
+              <div class="hover:bg-gradient-to-r hover:from-green-700 hover:to-green-950 w-full duration-500 p-2 rounded">
+                <li>Offer</li>
+              </div>
+            </ul>
+          </div>)}
+      </div>
+      )}
+      
+
 
       <main className="max-w-7xl mx-auto px-6 py-8">
         <Outlet />

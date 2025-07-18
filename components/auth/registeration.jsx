@@ -203,7 +203,7 @@ const navigate = useNavigate()
           </div>
 
           <div>
-            <label htmlFor="confirm_password" className="block text-sm font-medium text-gray-700">
+            <label htmlFor="confirm_password" className="block text-sm font-medium text-white">
               Confirm Password
             </label>
             <input
@@ -225,7 +225,7 @@ const navigate = useNavigate()
             onChange={handleCheckboxChange}
             required
             />
-            <label htmlFor="agreement" className="block text-sm font-medium text-gray-700">
+            <label htmlFor="agreement" className="block text-sm font-medium text-green-400">
               I agree to the terms and conditions
             </label>
           </div>
@@ -244,7 +244,7 @@ const navigate = useNavigate()
     rounded-md text-white font-semibold transition-colors`}
             >
               {loading && <i className="bi bi-arrow-repeat animate-spin"></i>}
-              {loading ? "Logging in..." : "Login"}
+              {loading ? "Registering..." : "Register"}
             </button>
         </form>
 

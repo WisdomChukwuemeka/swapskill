@@ -63,7 +63,9 @@ class User(AbstractBaseUser, PermissionsMixin):
         return self.email
     
 class Profile(models.Model):
+    # user = models.OneToOneField(User, on_delete=models.CAS)
     avatar = models.ImageField(upload_to='images/avatar', blank=True, null=True)
+    
     
     def __str__(self):
         return self.avatar

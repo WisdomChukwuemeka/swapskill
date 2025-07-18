@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'rest_framework_simplejwt',
     'accounts',
     'corsheaders',
+    'products',
 ]
 
 REST_FRAMEWORK = {
@@ -57,7 +58,7 @@ REST_FRAMEWORK = {
 }
 AUTH_USER_MODEL = 'accounts.User'
 SIMPLE_JWT = {
-    "ACCESS_TOKEN_LIFETIME": timedelta(minutes=5),
+    "ACCESS_TOKEN_LIFETIME": timedelta(days=2),
     "REFRESH_TOKEN_LIFETIME": timedelta(days=7),
     "ROTATE_REFRESH_TOKENS": True,
     "BLACKLIST_AFTER_ROTATION": True,
