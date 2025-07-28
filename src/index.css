@@ -1,0 +1,26 @@
+@import "tailwindcss";
+
+
+*{
+    box-sizing: border-box;
+}
+body{
+    background-color: black;
+}
+
+
+/* styles.css */
+@media (min-width: 4000px) {
+  .container {
+    max-width: 4000px; /* or whatever max-width you want */
+    margin-left: 50%;
+    margin-right: 50%;
+  }
+}
+
+@media (max-width: 300px) {
+  .display{
+    display: grid;
+    grid-template-columns: 1fr;
+  }
+}
