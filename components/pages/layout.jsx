@@ -4,15 +4,15 @@ import "bootstrap-icons/font/bootstrap-icons.css";
 import { useState, useRef, useEffect, useContext } from "react";
 import { Link, Outlet } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
-import { DataContext } from "../context/context"
+// import { DataContext } from "../context/context"
 
 
 export const Layout = () => {
-  const {
-          searchButton,
-          skill, searchskill, 
-          activeView, setActiveView, 
-    } = useContext(DataContext)
+  // const {
+  //         searchButton,
+  //         skill, searchskill, 
+  //         activeView, setActiveView, 
+  //   } = useContext(DataContext)
 
   const navigate = useNavigate();
   

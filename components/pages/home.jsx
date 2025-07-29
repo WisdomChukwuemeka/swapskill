@@ -1,12 +1,12 @@
 import { useState, useEffect, useContext } from "react"
-import { DataContext } from "../context/context"
+// import { DataContext } from "../context/context"
 export const Home = () => {
-  const {
-            searchButton,
-            skill, searchskill, 
-            activeView, setActiveView, 
-            responseData, handleSearchChange
-  } = useContext(DataContext)
+  // const {
+  //           searchButton,
+  //           skill, searchskill, 
+  //           activeView, setActiveView, 
+  //           responseData, handleSearchChange
+  // } = useContext(DataContext)
   return(
     <>
     <section>

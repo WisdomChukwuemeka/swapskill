@@ -14,7 +14,7 @@ import { Terms } from "../components/pages/terms"
 export const App = () => {
   return(
     <>
-    <div class="scroll-smooth bg-[linear-gradient(rgba(0,0,0,0.9),rgba(0,0,0,0.9)),url('../src/assets/bg.png')] max-w-[4000px] mx-auto  min-h-screen text-white">
+    <div class=" containier -smooth bg-[linear-gradient(rgba(0,0,0,0.9),rgba(0,0,0,0.9)),url('../src/assets/bg.png')] max-w-[4000px] mx-auto  min-h-screen text-white">
           <BrowserRouter>
             <Routes>
               <Route path="/" element={<Layout />}>
