@@ -3,9 +3,10 @@ import { AddSkill } from "../../services/productapi";
 import { useState, useEffect } from "react";
 import "bootstrap-icons/font/bootstrap-icons.css";
 
-
 export const Information = () => {
-
+const [isLoggedIn, setIsLoggedIn] = useState(
+  localStorage.getItem("role")
+);
 const links = [
     { id: 1, label: "API Endpoint 1", url: "#" },
     { id: 2, label: "API Endpoint 2", url: "#" },
@@ -47,7 +48,10 @@ const links = [
   return (
     <>
 
-        {skill && (
+    {isLoggedIn && (
+      <div>
+
+       {skill && (
           <div class=" relative flex flex-col justify-center 
           items-center 
           gap-8  overflow-x-auto 
@@ -124,52 +128,20 @@ const links = [
   <div class="flex flex-col md:flex-row  gap-8 justify-center items-center mt-8">
 
       <div>
-         <div className="relative">
-  {skill.videos && skill.videos.length > 0 && (
-    <>
-      <video
-        id={`video-${skill.id}`}
-        controls
-        preload="metadata"
-        muted
-        playsInline
-        className="aspect-square rounded-2xl md:h-70 lg:h-130 w-full object-cover"
-      >
-        <source src={skill.videos[0].video_file} type="video/mp4" />
-        Your browser does not support the video tag.
-      </video>
-
-      {/* Play overlay with floating circle */}
-      <button
-        onClick={() => {
-          const video = document.getElementById(`video-${skill.id}`);
-          if (video) {
-            video.play();
-            const overlay = document.getElementById(`overlay-${skill.id}`);
-            if (overlay) overlay.style.display = "none";
-          }
-        }}
-        id={`overlay-${skill.id}`}
-        className="absolute inset-0 flex items-center justify-center transition"
-      >
-        {/* Animated floating circle */}
-        <div className="relative flex items-center justify-center">
-          <div className="w-20 h-20 rounded-full border-4 border-white animate-spin-slow"></div>
-          <div className="absolute flex items-center justify-center w-16 h-16 rounded-full bg-green-600 text-white">
-            <svg
-              className="w-8 h-8"
-              fill="currentColor"
-              viewBox="0 0 20 20"
-            >
-              <path d="M4 4l12 6-12 6V4z" />
-            </svg>
-          </div>
-        </div>
-      </button>
-    </>
-  )}
-</div>
-
+         <div>
+                {skill.videos && skill.videos.length > 0 && (
+              <video
+                controls
+                preload="metadata"
+                muted
+                playsInline
+                className="aspect-square rounded-2xl md:h-70 lg:h-130 w-full object-cover"
+              >
+                <source src={skill.videos[0].video_file} type="video/mp4" />
+                Your browser does not support the video tag.
+              </video>
+            )}
+            </div>
       </div>
 
       <div>
@@ -213,8 +185,11 @@ const links = [
 
   </div>
 </section>
+ 
+      </div>
+    )}
 
-          
+       
     </>
   );
 };
