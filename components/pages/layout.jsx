@@ -14,6 +14,8 @@ export const Layout = () => {
   //         activeView, setActiveView, 
   //   } = useContext(DataContext)
 
+
+  
   const navigate = useNavigate();
   
 
