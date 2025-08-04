@@ -1,6 +1,6 @@
 import { useNavigate, Link } from "react-router-dom";
 import { AuthAPI } from "../services/api";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 export const Login = ({ onLogin }) => {
   const navigate = useNavigate();
   const [credentials, setcredentials] = useState({
@@ -11,6 +11,26 @@ export const Login = ({ onLogin }) => {
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
   const [loading, setLoading] = useState(false);
+
+  
+      
+        useEffect(() => {
+          // ✅ Simulate loading time (e.g. data fetch)
+          const timer = setTimeout(() => {
+            setLoading(false);
+          }, 2000); // 2 seconds spinner
+      
+          return () => clearTimeout(timer);
+        }, []);
+      
+         if (loading) {
+          return (
+            <div className="flex flex-col items-center justify-center h-screen">
+              <div className="animate-spin rounded-full h-20 w-20 border-t-4 border-b-4 border-green-500"></div>
+              <p className="mt-4 text-white">Loading...</p>
+            </div>
+          );
+        }
 
   const handleChange = (e) => {
     setcredentials((prevData) => ({
@@ -39,6 +59,7 @@ export const Login = ({ onLogin }) => {
       const is_superuser = JSON.parse(localStorage.getItem("is_superuser"));
       if (role === "create") {
   navigate("/dashboard");
+
   window.location.reload();
 } else if (role === "offer") {
   navigate("/");
@@ -57,8 +78,8 @@ export const Login = ({ onLogin }) => {
 
   return (
     <>
-      <div className="min-h-screen px-16 lg:px-[35%] flex items-center justify-center bg-gradient-to-br">
-        <div className="w-full h-fit  p-8 px-10 rounded-3xl border border-white/30 bg-white/10 backdrop-blur-lg shadow-lg">
+      <div className="min-h-screen  lg:px-[35%] flex items-center justify-center bg-gradient-to-br">
+        <div className="w-full h-fit md:px-16  p-8 px-10 rounded-3xl border border-white/30 bg-white/10 backdrop-blur-lg shadow-lg">
           <div class="flex flex-col">
             <i className="bi bi-circle-half text-2xl md:text-4xl mb-3 font-bold text-center"></i>
             <h2 className="text-2xl md:text-3xl font-bold mb-6 text-center">

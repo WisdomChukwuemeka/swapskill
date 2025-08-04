@@ -29,7 +29,8 @@ api.interceptors.response.use(
 export const AddSkill = {
    Skill: (formData) => api.post('/skill/', formData),
    List_Skill: (search = '') => api.get(`/list_skill/?search=${search}`),
-   allSkill: () => api.get('/list_skill/'),
+   All_Skill: () => api.get('/list_skill/'),
+   View_information: (id) => api.get(`/all_skill/${id}/`),
    Update_skill: (SkillID, formData) => api.put(`/skills/${SkillID}/update/`, formData)
 }
 

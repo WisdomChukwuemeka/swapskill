@@ -8,6 +8,8 @@ body{
     background-color: black;
 }
 
+/* In your index.css or tailwind.css */
+
 
 /* styles.css */
 @media (min-width: 4000px) {

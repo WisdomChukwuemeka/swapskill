@@ -152,15 +152,7 @@ export const Layout = () => {
         </header>
 
         {/* Dropdown Menu */}
-        {menuOpen && (
-          <nav
-  ref={menuRef}
-  className="absolute  right-0 w-full max-w-sm bg-white/10 backdrop-blur-md rounded-xl shadow-lg p-6 md:p-8 text-white z-20"
->
-
-</nav>
-
-        )}
+  
       </div>
 
 
@@ -170,9 +162,9 @@ export const Layout = () => {
         {!leftbarOpen ? ("") : 
         (<div
           ref={leftbarRef}
-          className="absolute  left-0 w-full max-w-sm bg-white/10 backdrop-blur-md rounded-xl shadow-lg p-6 md:p-8 text-white z-20">
+          className="absolute  left-0  w-full max-w-sm bg-white/10 backdrop-blur-md rounded-xl shadow-lg p-6 md:p-8 text-white z-20">
             <ul class="flex flex-col w-full px-4 py-3 md:py-4 md:text-2xl justify-evenly items-center gap-8 text-md">
-              <div class="hover:bg-gradient-to-r hover:from-green-700 hover:to-green-950  w-full duration-500 p-2 rounded">
+              <div class="hover:bg-gradient-to-r  hover:from-green-700 hover:to-green-950  w-full duration-500 p-2 rounded">
                 <Link to="/" >
                 <li class="flex gap-4"><i class="bi bi-house"></i>Home</li>
                 </Link>
@@ -277,7 +269,7 @@ export const Layout = () => {
       
 
 
-      <main className="flex-grow p-6 md:p-8">
+      <main className="container mx-auto p-6 md:p-8">
         <Outlet />
       </main>
     </>

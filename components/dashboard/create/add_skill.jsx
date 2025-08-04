@@ -104,7 +104,7 @@ export const Addskill = () => {
   useEffect(() => {
     const fetchSkill = async () => {
       try {
-        const response = await AddSkill.List_Skill();
+        const response = await AddSkill.All_Skill();
         setSkills(response.data.results);
         console.log(response.data);
       } catch (err) {
