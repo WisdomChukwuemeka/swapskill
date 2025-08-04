@@ -15,16 +15,15 @@ export const DataProvider = ({children}) => {
 
     useEffect(() => {
         const fetchSkill = async() => {
-            try{
-            const response = await AddSkill.List_Skill()
-            setSkill(response.data.results)
-            console.log(response.data.results)
-            setActiveView('search')
-            } catch(error){
-                setError(
-                    
-                )
-            }
+            try {
+  const response = await AddSkill.List_Skill();
+  setSkill(Array.isArray(response.data.results) ? response.data.results : []);
+  setActiveView('search');
+} catch (error) {
+  console.error(error); // Add this to debug
+  setError('Failed to fetch skills');
+}
+
         }
         fetchSkill()
     }, [])

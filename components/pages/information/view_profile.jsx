@@ -22,7 +22,7 @@ const links = [
     const fetch_profile = async () => {
       const response = await AddSkill.View_information(id);
       setSkill(response.data);
-      console.log(response.data);
+      // console.log(response.data);
     };
     fetch_profile();
   }, [id]);

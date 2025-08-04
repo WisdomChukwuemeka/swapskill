@@ -83,7 +83,7 @@ useEffect(() => {
               
               <section class=" rounded-2xl shadow-md  items-center justify-center">
               <div className="  gap-5 grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4">
-                {skill.map((skill) => {
+                {(skill || []).map((skill) => {
                   const lastVideo =
                     skill.videos && skill.videos.length > 0
                       ? skill.videos[skill.videos.length - 1]
